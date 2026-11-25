@@ -1,0 +1,41 @@
+
+#include <stdio.h>
+
+int main()
+{
+    FILE *fptr1, *fptr2;
+    char ch;
+
+    // Open source file in read mode
+    fptr1 = fopen("source.txt", "r");
+
+    if(fptr1 == NULL)
+    {
+        printf("Unable to open source file.");
+        return 1;
+    }
+
+    // Open destination file in write mode
+    fptr2 = fopen("destination.txt", "w");
+
+    if(fptr2 == NULL)
+    {
+        printf("Unable to open destination file.");
+        fclose(fptr1);
+        return 1;
+    }
+
+    // Copy contents from source to destination
+    while((ch = fgetc(fptr1)) != EOF)
+    {
+        fputc(ch, fptr2);
+    }
+
+    printf("File copied successfully.");
+
+    // Close both files
+    fclose(fptr1);
+    fclose(fptr2);
+
+    return 0;
+}
